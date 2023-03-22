@@ -1,12 +1,12 @@
-#include "Motor_Control_Gyems.h"
+#include "Motor_Control_Gemini.h"
 
-Motor_Control_Gyems::Motor_Control_Gyems(uint8_t id, int Can_id)
+Motor_Control_Gemini::Motor_Control_Gemini(uint8_t id, int Can_id)
 {
   ID = id;
 }
-Motor_Control_Gyems::~Motor_Control_Gyems()
+Motor_Control_Gemini::~Motor_Control_Gemini()
 {}
-void Motor_Control_Gyems::init_motor_CAN()
+void Motor_Control_Gemini::init_motor_CAN()
 {
   //initial CAN Bus
   Can0.begin(1000000, defaultMask, 1, 1);
@@ -45,7 +45,7 @@ void Motor_Control_Gyems::init_motor_CAN()
   delay(10);
 }
 //////////////////Check if there is a CAN message, then read it///////////////
-void Motor_Control_Gyems::receive_CAN_data()
+void Motor_Control_Gemini::receive_CAN_data()
 {
   while (Can0.available() > 0)
   {
@@ -55,7 +55,7 @@ void Motor_Control_Gyems::receive_CAN_data()
 }
 ////////////////////////////////////////////////////////////////////////////
 ////////////////Received CAN Message Decoding////////////////////////////////
-void Motor_Control_Gyems::DataExplanation(CAN_message_t msgR2)
+void Motor_Control_Gemini::DataExplanation(CAN_message_t msgR2)
 {
   int len = msgR2.len;
   if (len == 8)
@@ -333,7 +333,7 @@ void Motor_Control_Gyems::DataExplanation(CAN_message_t msgR2)
 /////////////////////////////////////////////////////////////////////
 
 //******1.Read PID data command******//
-void Motor_Control_Gyems::read_PID()
+void Motor_Control_Gemini::read_PID()
 {
   msgW.id = 0x140 + ID;
   msgW.ext = 0;
@@ -352,7 +352,7 @@ void Motor_Control_Gyems::read_PID()
   receive_CAN_data();
 }
 //******2.Write PID gain to RAM******//
-void Motor_Control_Gyems::write_PID_RAM(uint8_t Kp_pos,uint8_t Ki_pos,uint8_t Kp_vel,uint8_t Ki_vel,uint8_t Kp_cur,uint8_t Ki_cur)
+void Motor_Control_Gemini::write_PID_RAM(uint8_t Kp_pos,uint8_t Ki_pos,uint8_t Kp_vel,uint8_t Ki_vel,uint8_t Kp_cur,uint8_t Ki_cur)
 {
   msgW.id = 0x140 + ID;
   msgW.ext = 0;
@@ -372,7 +372,7 @@ void Motor_Control_Gyems::write_PID_RAM(uint8_t Kp_pos,uint8_t Ki_pos,uint8_t Kp
 }
 
 //******3.Write PID gain to ROM******//
-void Motor_Control_Gyems::write_PID_ROM(uint8_t Kp_pos,uint8_t Ki_pos,uint8_t Kp_vel,uint8_t Ki_vel,uint8_t Kp_cur,uint8_t Ki_cur)
+void Motor_Control_Gemini::write_PID_ROM(uint8_t Kp_pos,uint8_t Ki_pos,uint8_t Kp_vel,uint8_t Ki_vel,uint8_t Kp_cur,uint8_t Ki_cur)
 {
   msgW.id = 0x140 + ID;
   msgW.ext = 0;
@@ -392,7 +392,7 @@ void Motor_Control_Gyems::write_PID_ROM(uint8_t Kp_pos,uint8_t Ki_pos,uint8_t Kp
 }
 
 //******4.Read Acceleration******//
-void Motor_Control_Gyems::read_acceleration()
+void Motor_Control_Gemini::read_acceleration()
 {
   msgW.id = 0x140 + ID;
   msgW.ext = 0;
@@ -411,7 +411,7 @@ void Motor_Control_Gyems::read_acceleration()
   receive_CAN_data();
 }
 //******5.Write Acceleration RAM******//
-void Motor_Control_Gyems::write_acceleration_RAM()
+void Motor_Control_Gemini::write_acceleration_RAM()
 {
   msgW.id = 0x140 + ID;
   msgW.ext = 0;
@@ -430,7 +430,7 @@ void Motor_Control_Gyems::write_acceleration_RAM()
   receive_CAN_data();
 }
 //******6.Read encoder Position******//
-void Motor_Control_Gyems::read_encoder()
+void Motor_Control_Gemini::read_encoder()
 {
   msgW.id = 0x140 + ID;
   msgW.ext = 0;
@@ -448,7 +448,7 @@ void Motor_Control_Gyems::read_encoder()
   receive_CAN_data();
 }
 //******7.Write ENCODER OFFSET ROM******//
-void Motor_Control_Gyems::write_encoder_offset_RAM(uint16_t encoder_Offset )
+void Motor_Control_Gemini::write_encoder_offset_RAM(uint16_t encoder_Offset )
 {
   encoderOffset = encoder_Offset;
   msgW.id = 0x140 + ID;
@@ -468,7 +468,7 @@ void Motor_Control_Gyems::write_encoder_offset_RAM(uint16_t encoder_Offset )
   receive_CAN_data();
 }
 //******8.Write current postioton as Zero degree******//
-void Motor_Control_Gyems::write_current_position_as_zero_position()
+void Motor_Control_Gemini::write_current_position_as_zero_position()
 {
   msgW.id = 0x140 + ID;
   msgW.ext = 0;
@@ -487,7 +487,7 @@ void Motor_Control_Gyems::write_current_position_as_zero_position()
   receive_CAN_data();
 }
 //******9.Read multi turns angle command******//
-void Motor_Control_Gyems::read_multi_turns_angle()
+void Motor_Control_Gemini::read_multi_turns_angle()
 {
   msgW.id = 0x140 + ID;
   msgW.ext = 0;
@@ -506,7 +506,7 @@ void Motor_Control_Gyems::read_multi_turns_angle()
   receive_CAN_data();
 }
 //******10.Read single circle angle command******//
-void Motor_Control_Gyems::read_single_turns_angle()
+void Motor_Control_Gemini::read_single_turns_angle()
 {
   msgW.id = 0x140 + ID;
   msgW.ext = 0;
@@ -525,7 +525,7 @@ void Motor_Control_Gyems::read_single_turns_angle()
   receive_CAN_data();
 }
 //(current cannot use it)******11.clear all angle command and offset currnet position as zero command (unit 0.01deg/LSB)******//
-void Motor_Control_Gyems::clear_motor_angle_command()
+void Motor_Control_Gemini::clear_motor_angle_command()
 {
   msgW.id = 0x140 + ID;
   msgW.ext = 0;
@@ -544,7 +544,7 @@ void Motor_Control_Gyems::clear_motor_angle_command()
   receive_CAN_data();
 }
 //******12.read motor status and error (temperature(1degreeC/LSB), voltage(0.1V/LSB), errorState:(0: normal, 1:abnormal)0bit Voltage 3bit temperature) ******//
-void Motor_Control_Gyems::read_motor_status()
+void Motor_Control_Gemini::read_motor_status()
 {
   msgW.id = 0x140 + ID;
   msgW.ext = 0;
@@ -563,7 +563,7 @@ void Motor_Control_Gyems::read_motor_status()
   receive_CAN_data();
 }
 //******13.clear motot error and reset motor******//
-void Motor_Control_Gyems::clear_motor_error()
+void Motor_Control_Gemini::clear_motor_error()
 {
   msgW.id = 0x140 + ID;
   msgW.ext = 0;
@@ -582,7 +582,7 @@ void Motor_Control_Gyems::clear_motor_error()
   receive_CAN_data();
 }
 //******14.read motor status 2 (temperature 1degreeC/LSB, iq(-2048~2048 mapping to -33A ~33A), speed(1dps/LSB), 14 bit encoder value(0~16383))******//
-void Motor_Control_Gyems::read_motor_status_2()
+void Motor_Control_Gemini::read_motor_status_2()
 {
   msgW.id = 0x140 + ID;
   msgW.ext = 0;
@@ -601,7 +601,7 @@ void Motor_Control_Gyems::read_motor_status_2()
   receive_CAN_data();
 }
 //******15.read motor status 3 (temperature 1degreeC/LSB,A phase current(1A/64LSB),B phase current(1A/64LSB),C phase current(1A/64LSB) )******//
-void Motor_Control_Gyems::read_motor_status_3()
+void Motor_Control_Gemini::read_motor_status_3()
 {
   msgW.id = 0x140 + ID;
   msgW.ext = 0;
@@ -620,7 +620,7 @@ void Motor_Control_Gyems::read_motor_status_3()
   receive_CAN_data();
 }
 //******16.close motor and clear all command******//
-void Motor_Control_Gyems::close_motor()
+void Motor_Control_Gemini::close_motor()
 {
   msgW.id = 0x140 + ID;
   msgW.ext = 0;
@@ -639,7 +639,7 @@ void Motor_Control_Gyems::close_motor()
   receive_CAN_data();
 }
 //******17.stop motor but don't clear any previous command******//
-void Motor_Control_Gyems::stop_motor()
+void Motor_Control_Gemini::stop_motor()
 {
   msgW.id = 0x140 + ID;
   msgW.ext = 0;
@@ -658,7 +658,7 @@ void Motor_Control_Gyems::stop_motor()
   receive_CAN_data();
 }
 //******18.start motor******//
-void Motor_Control_Gyems::start_motor()
+void Motor_Control_Gemini::start_motor()
 {
   msgW.id = 0x140 + ID;
   msgW.ext = 0;
@@ -684,7 +684,7 @@ void Motor_Control_Gyems::start_motor()
   receive_CAN_data();
 }
 //******19.current control: send current command current unit A(not limited by maximum Torque Current)******//
-void Motor_Control_Gyems::send_current_command(double current)
+void Motor_Control_Gemini::send_current_command(double current)
 {
   current = current * 2000 / 32;
   iqControl = (int16_t)current;
@@ -705,7 +705,7 @@ void Motor_Control_Gyems::send_current_command(double current)
   //receive_CAN_data();
 }
 //******20.speed control: send speed command speed unit dps******//
-void Motor_Control_Gyems::send_speed_command(double speedvalue)
+void Motor_Control_Gemini::send_speed_command(double speedvalue)
 {
   speedvalue = speedvalue * 100;
   speedControl = (int32_t)speedvalue;
@@ -726,7 +726,7 @@ void Motor_Control_Gyems::send_speed_command(double speedvalue)
   receive_CAN_data();
 }
 //******21.position control:send position command (angle unit degree)******//
-void Motor_Control_Gyems::send_position_command(double angle)
+void Motor_Control_Gemini::send_position_command(double angle)
 {
   angle = angle * 100;
   angleControl = (int32_t)angle;
@@ -750,7 +750,7 @@ void Motor_Control_Gyems::send_position_command(double angle)
 //(limited by maximum speed unit 1dps)******//
 //(limited by maximum angle)//
 //(limited by maximum current)//
-void Motor_Control_Gyems::send_position_command_2(double angle, double max_speed)
+void Motor_Control_Gemini::send_position_command_2(double angle, double max_speed)
 {
   angle = angle * 100;
   angleControl = (int32_t)angle;
@@ -776,7 +776,7 @@ void Motor_Control_Gyems::send_position_command_2(double angle, double max_speed
 //(limited by maximum speed unit 1dps)******//
 //(limited by maximum angle)//
 //(limited by maximum current)//
-void Motor_Control_Gyems::send_position_command_3(double angle, uint8_t spinDirection)
+void Motor_Control_Gemini::send_position_command_3(double angle, uint8_t spinDirection)
 {
   angle = angle * 100;
   angleControl = (uint8_t)angle;
@@ -801,7 +801,7 @@ void Motor_Control_Gyems::send_position_command_3(double angle, uint8_t spinDire
 //(limited by maximum speed unit 1dps)******//
 //(limited by maximum angle)//
 //(limited by maximum current)//
-void Motor_Control_Gyems::send_position_command_4(double angle, double max_speed, uint8_t spinDirection)
+void Motor_Control_Gemini::send_position_command_4(double angle, double max_speed, uint8_t spinDirection)
 {
   angle = angle * 100;
   angleControl = (uint8_t)angle;
@@ -825,7 +825,7 @@ void Motor_Control_Gyems::send_position_command_4(double angle, double max_speed
 }
 //******25.multi-motors current control
 //ID must be #1~#4 for four motor
-void Motor_Control_Gyems::send_multi_motor_current_command(double Motor1_current, double Motor2_current, double Motor3_current, double Motor4_current)
+void Motor_Control_Gemini::send_multi_motor_current_command(double Motor1_current, double Motor2_current, double Motor3_current, double Motor4_current)
 {
   iqControl_1 = (int16_t)Motor1_current;
   iqControl_2 = (int16_t)Motor2_current;

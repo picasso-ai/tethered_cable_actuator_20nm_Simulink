@@ -1,11 +1,11 @@
-#include "Motor_Control_Gyems.h"
+#include "Motor_Control_Gemini.h"
 #include "Speedgoat_Comm.h"
 #include "ads1292r.h"
 int gear_ratio = 8;
 float kT = 3.0; // Constant torque [Nm/A] Max current: 7 A
 int CAN_ID = 0;    // CAN port from Teensy. Teensy has two CAN port. We use CAN port 1
 int Motor_ID = 1;  // Motor Can Bus ID
-Motor_Control_Gyems m1(Motor_ID, CAN_ID); //Create motor object see Motor_Control_Gyems.h
+Motor_Control_Gemini m1(Motor_ID, CAN_ID); //Create motor object see Motor_Control_Gemini.h
 Speedgoat_Comm SG; //Create Speedgoat COM object see Speefgoat_Comm.h
 ads1292r torque_sensor1;  
 
