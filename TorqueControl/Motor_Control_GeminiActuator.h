@@ -1,5 +1,5 @@
-//#ifndef _MOTOR_CONTROL_GEMINIC_H
-//#define _MOTOR_CONTROL_GEMINIC_H
+//#ifndef _MOTOR_CONTROL_GEMINIACTUATOR_H
+//#define _MOTOR_CONTROL_GEMINIACTUATOR_H
 #include <FlexCAN.h>
 #include <Arduino.h>
 #ifndef __MK66FX1M0__
@@ -10,7 +10,7 @@
 #define velocity_control_mode 2
 #define current_control_mode 1
 
-class Motor_Control_Geminic
+class Motor_Control_GeminiActuator
 {
   public:
     uint8_t anglePidKp = 30;
@@ -62,8 +62,8 @@ class Motor_Control_Geminic
     uint16_t voltage=0;
     uint8_t errorState=0;
 
-    Motor_Control_Geminic(uint8_t id, int c0);
-    ~Motor_Control_Geminic();
+    Motor_Control_GeminiActuator(uint8_t id, int c0);
+    ~Motor_Control_GeminiActuator();
     void init_motor_CAN();
     void DataExplanation(CAN_message_t msg2);
     void receive_CAN_data();
