@@ -1,1 +1,8 @@
-# tethered_cable_actuator_20nm_Simulink
+# 20Nm Tethered Cable Actuator 
+Prerequisite
+
+Simulink Setup
+
+Arduino Setup
+
+Operation
