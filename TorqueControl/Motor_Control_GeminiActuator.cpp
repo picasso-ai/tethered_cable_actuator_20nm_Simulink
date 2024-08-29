@@ -43,6 +43,7 @@ void Motor_Control_GeminiActuator::init_motor_CAN()
   delay(10);
   read_motor_status_3();
   delay(10);
+  motorAngle_offset=motorAngle_raw;
 }
 //////////////////Check if there is a CAN message, then read it///////////////
 void Motor_Control_GeminiActuator::receive_CAN_data()
@@ -169,8 +170,9 @@ void Motor_Control_GeminiActuator::DataExplanation(CAN_message_t msgR2)
 //        int64_t motorAngle_int64=(int64_t)motorAngle_uint64;
 //        motorAngle = ((double)motorAngle_int64*0.01);
         motorAngle_int32 = (int32_t)( ((uint32_t)msgR2.buf[4] << 24) | ((uint32_t)msgR2.buf[3] << 16) | ((uint32_t)msgR2.buf[2] << 8) | ((uint32_t)msgR2.buf[1] )) ;
-        motorAngle= ((double) motorAngle_int32*0.01);
-     
+        motorAngle_raw= ((double) motorAngle_int32*0.01);
+        motorAngle_raw = motorAngle_raw/gear_ratio;  
+        motorAngle=motorAngle_raw-motorAngle_offset;
         break;
       case 0x94: //10: read single turn circle angle
         circleAngle = (uint16_t)(((uint16_t)msgR2.buf[7] << 8) | ((uint16_t)msgR2.buf[6]));
