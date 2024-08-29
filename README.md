@@ -3,6 +3,8 @@
 Hardware Parts
 Electronics Parts
 
+![Electronics List](./resources/Electronics List.png) 
+
 **Simulink Setup**
 1. Install Simulink Real-Time Target Support Package
     * In MATLAB, **Home** > **Add-Ons** > **Get Add-Ons**
@@ -20,7 +22,7 @@ Electronics Parts
 6. Open MATLAB and type in slrtExplorer in the MATLAB Command Window
 7. In the Target Configuration tab, set the IP address to 192.168.7.5 then click Update Software
 8. Connect to Speedgoat by selecting TargetPC1 and click on the connect button under.
-   
+
 **Note:** After configuring Simulink ports and address, you can connect to Speedgoat by just clicking on the connect button
 
 **Teensy Setup**
