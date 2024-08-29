@@ -49,6 +49,7 @@ void setup()
   m1.read_PID();
   //m1.write_PID_RAM(30, 5, 30, 5, 30, 5);
   m1.write_PID_RAM(200, 5, 30, 5, 30, 5);
+  reset_motor_angle();
   torque_sensor1.Torque_sensor_initial(); //initial the torque sensor see ads1292r.cpp.
   //torque_sensor1.Torque_sensor_gain(0.0003446 * (-1) * 2 * 0.32, 0.0003446 * (-1) * 2 * 0.32); 
   //torque_sensor1.Torque_sensor_gain(0.0003446 * (-1) * 2 / 1.049, 0.0003446 * (-1) * 2 / 1.049); 
@@ -123,4 +124,14 @@ void loop()
   }
     
 
+}
+void reset_motor_angle()
+{
+  for (int i = 0; i < 20; i++)
+  {
+    m1.read_multi_turns_angle();
+    delay(10);
+    receive_CAN_data();
+    m1.motorAngle_offset = m1.motorAngle_raw;
+  }
 }
