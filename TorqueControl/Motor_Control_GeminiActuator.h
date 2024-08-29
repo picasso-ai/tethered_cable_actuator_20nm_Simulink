@@ -58,6 +58,8 @@ class Motor_Control_GeminiActuator
     uint16_t encoderRaw =0;
     uint16_t encoderOffset =0;
     double motorAngle=0;
+    double motorAngle_offset=0;
+    double motorAngle_raw=0;
     uint16_t circleAngle=0;
     uint16_t voltage=0;
     uint8_t errorState=0;
