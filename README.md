@@ -1,9 +1,11 @@
 # 20Nm Tethered Cable Actuator 
 # Prerequisite
 Hardware Parts
-Electronics Parts
+![Assembly](./resources/Assembly.png) 
 
-![Electronics List](./resources/Electronics List.png) 
+
+Electronics Parts
+![Electronics List](./resources/ElectronicsList.png) 
 
 **Simulink Setup**
 1. Install Simulink Real-Time Target Support Package
@@ -19,9 +21,14 @@ Electronics Parts
 5. Right-click on the Ethernet controller and change the Internet Protocol Version 4 Properties to the following
     * IP address: 192.168.7.2
     * Subnet mask: 255.255.255.0
+      
+![SG setup 1](./resources/SpeedgoatSetup.png) 
+
 6. Open MATLAB and type in slrtExplorer in the MATLAB Command Window
 7. In the Target Configuration tab, set the IP address to 192.168.7.5 then click Update Software
 8. Connect to Speedgoat by selecting TargetPC1 and click on the connect button under.
+
+![SG setup 2](./resources/SpeedgoatSetup2.png) 
 
 **Note:** After configuring Simulink ports and address, you can connect to Speedgoat by just clicking on the connect button
 
@@ -46,4 +53,14 @@ Electronics Parts
     * Hang the weights
     * Check if the reading on the serial monitor is similar to the torque reading expected
 9. Alter the gain value accordingly to match the correct torque reading displayed in the serial monitor
+
+![Calibration](./resources/Calibration.png)   
+
 # Operation
+
+**Zeroing Encoder**
+
+**Simulink Tuning**
+
+![Tuning 1](./resources/Tuning.png)   
+![Tuning 2](./resources/Tuning2.png)   
