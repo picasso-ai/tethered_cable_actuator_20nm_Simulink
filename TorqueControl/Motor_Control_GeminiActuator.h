@@ -106,5 +106,6 @@ class Motor_Control_GeminiActuator
     int32_t acceleration_int32=0;
     uint64_t motorAngle_uint64=0;
     int32_t motorAngle_int32;
+    double gear_ratio;
 };
 //#endif
