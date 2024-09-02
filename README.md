@@ -1,8 +1,8 @@
 # 20Nm Tethered Cable Actuator 
 # Prerequisite
 Assembly
+![AssemblyBlock](./resources/AssemblyBlock.png) 
 ![Assembly](./resources/Assembly.png) 
-
 
 Electronics Parts
 ![Electronics List](./resources/ElectronicsList.png) 
